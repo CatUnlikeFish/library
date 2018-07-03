@@ -1,0 +1,35 @@
+﻿<script type="text/javascript">
+  @{  int a = ViewBag.Message; }
+    if (@a == 0) {
+        alert("未登录！");
+        window.location.href ="@Url.Action("Admin","Home")";
+    }
+
+    if (@a== 1) {
+
+    }
+     @{  int b = ViewBag.success; }
+    if (@b == -2) {
+        alert("信息不完整，请重新填写！");
+    }
+    if (@b== -1) {
+
+    }
+    if (@b== -3) {
+        alert("数量不能为0！");
+    }
+    if (@b== -4) {
+        alert("BookId重复！");
+    }
+    if (@b== 1) {
+        alert("添加成功！");
+    }
+</script>
+@using (Html.BeginRouteForm("Default", new { controller = "Home", action = "Manage", Id = 100 }, FormMethod.Post))
+{
+    <p>BookId：</p> <input type="text" name="BookId" />
+    <p>Title：</p> <input type="text" name="Title" />
+   <p>Author：</p> <input type="text" name="Author" />
+     <p>Total：</p> <input type="text" name="Total" />
+    <input type="submit" value="添加书籍" class="btn btn-default" />
+}

@@ -1,0 +1,33 @@
+﻿
+
+
+
+
+@using (Html.BeginRouteForm("Default", new { controller = "Home", action = "Search", Id = 100 }, FormMethod.Post))
+{
+    <p>书名：</p> <input type="text" name="Title" />
+    <p>作者：</p><input type="text" name="Author" />
+    <input type="submit" value="搜索" class="btn btn-default" />
+}
+    <table border="1">
+        <tr>
+            <td>BookId</td>
+            <td>Title</td>
+            <td>Author</td>
+            <td>Stock</td>
+        </tr>
+        @{
+            foreach (var i in ViewBag.result)
+            {
+
+                <tr>
+                    <td>@i.BookId</td>
+                    <td>@i.Title</td>
+                    <td>@i.Author</td>
+                    <td>@i.Stock</td>
+                </tr>
+            }
+
+
+        }
+    </table>

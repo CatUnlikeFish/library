@@ -1,0 +1,29 @@
+﻿<script type="text/javascript">
+  @{  int a = ViewBag.Message; }
+    if (@a == 0) {
+        alert("未登录！");
+        window.location.href ="@Url.Action("User","Home")";
+    }
+
+    if (@a== 1) {
+
+    }
+      @{  int b = ViewBag.success; }
+    if (@b == 0) {
+        alert("没借这本书，请重新查询！");
+    }
+    if (@b== -1) {
+
+    }
+    if (@b== -4) {
+        @a=0;
+    }
+    if (@b== 1) {
+        alert("还书成功！");
+    }
+</script>
+@using (Html.BeginRouteForm("Default", new { controller = "Home", action = "Return", Id = 100 }, FormMethod.Post))
+{
+    <p>BookId：</p> <input type="text" name="BookId" />
+    <input type="submit" value="还书" class="btn btn-default" />
+}

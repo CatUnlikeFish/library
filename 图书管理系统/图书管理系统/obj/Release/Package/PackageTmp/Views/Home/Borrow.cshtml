@@ -1,0 +1,35 @@
+﻿<script type="text/javascript">
+  @{  int a = ViewBag.Message; }
+    if (@a == 0) {
+        alert("未登录！");
+        window.location.href ="@Url.Action("User","Home")";
+    }
+
+    if (@a== 1) {
+
+    }
+  @{  int b = ViewBag.success; }
+    if (@b == 0) {
+        alert("不存在此BookId，请重新查询！");
+    }
+    if (@b== -2) {
+        alert("没有库存！");
+    }
+    if (@b== -3) {
+        alert("一人只能借同样的书一次！");
+    }
+    if (@b== -1) {
+
+    }
+    if (@b== -4) {
+        @a=0;
+    }
+    if (@b== 1) {
+        alert("借书成功！");
+    }
+</script>
+@using (Html.BeginRouteForm("Default", new { controller = "Home", action = "Borrow", Id = 100 }, FormMethod.Post))
+{
+<p>BookId：</p> <input type="text" name="BookId" />
+    <input type="submit" value="借书" class="btn btn-default" />
+}

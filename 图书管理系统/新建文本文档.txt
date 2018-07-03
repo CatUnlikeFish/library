@@ -1,0 +1,107 @@
+ Enable-Migrations -ContextTypeName 图书管理系统.Models.CodeFirst1
+Add-Migration v1
+Update-Database -Force
+update-database -script -SourceMigration $InitialDatabase
+
+
+   AutomaticMigrationsEnabled = true;
+            AutomaticMigrationDataLossAllowed = true;
+        }
+
+        public string ToMD5(string a)
+        {
+            MD5CryptoServiceProvider MD5 = new MD5CryptoServiceProvider();
+            string temp = BitConverter.ToString(MD5.ComputeHash(Encoding.GetEncoding("utf-8").GetBytes(a))).Replace("-", "").ToLower();
+            return temp;
+        }
+        protected override void Seed(图书管理系统.Models.CodeFirst1 context)
+        {
+            var book1 = new Book("11111", "C#图解教程", "索利斯", 5, 1);
+            var book2 = new Book("2222", "SQL进阶教程", "MICK", 10, 9);
+            var admin = new Admin("admin", ToMD5("admin"));
+            var user = new User("user", ToMD5("user"));
+            context.Books.AddOrUpdate(book1);
+            context.Books.AddOrUpdate(book2);
+            context.Admins.AddOrUpdate(admin);
+            context.Users.AddOrUpdate(user);
+            context.SaveChanges();
+            //  This method will be called after migrating to the latest version.
+
+            //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
+            //  to avoid creating duplicate seed data.
+        }
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   public override void Up()
+        {/*
+            CreateTable(
+                "dbo.Admins",
+                c => new
+                {
+                    NameId = c.String(nullable: false, maxLength: 128),
+                    Password = c.String(),
+                    Name = c.String(),
+                })
+                .PrimaryKey(t => t.NameId);
+
+            CreateTable(
+                "dbo.Books",
+                c => new
+                {
+                    BookId = c.String(nullable: false, maxLength: 128),
+                    Title = c.String(),
+                    Author = c.String(),
+                    Total = c.Int(nullable: false),
+                    Stock = c.Int(nullable: false),
+                })
+                .PrimaryKey(t => t.BookId);
+
+            CreateTable(
+                "dbo.Borrows",
+                c => new
+                {
+                    NameID = c.String(nullable: false, maxLength: 128),
+                    BookId = c.String(),
+                })
+                .PrimaryKey(t => t.NameID);
+
+            CreateTable(
+                "dbo.Users",
+                c => new
+                {
+                    NameId = c.String(nullable: false, maxLength: 128),
+                    password = c.String(),
+                })
+                .PrimaryKey(t => t.NameId);
+                */
+        }
+
+        public override void Down()
+        {/*
+            DropTable("dbo.Users");
+            DropTable("dbo.Borrows");
+            DropTable("dbo.Books");
+            DropTable("dbo.Admins");
+            */
+        }
+    }
+}
